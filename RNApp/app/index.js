@@ -6,6 +6,10 @@ import LoggedIn from './layouts/LoggedIn';
 import Loading from './components/Loading';
 import config from './config';
 
+import { Provider } from 'react-redux';
+import createStore from './createStore'
+const store = createStore();
+
 Meteor.connect(config.METEOR_URL);
 
 const RNApp = (props) => {
@@ -14,7 +18,11 @@ const RNApp = (props) => {
   if (status.connected === false || loggingIn) {
     return <Loading />;
   } else if (user !== null) {
-    return <LoggedIn />;
+    return (
+      <Provider store={store}>
+        <LoggedIn />
+      </Provider>
+    )
   } else {
     return <LoggedOut />;
   }
