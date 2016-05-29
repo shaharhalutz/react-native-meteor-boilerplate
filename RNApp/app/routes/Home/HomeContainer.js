@@ -1,6 +1,6 @@
 import React from 'react';
-import Home from './Home';
 import Routes from '../';
+import {battles} from '../../modules';
 
 const onDetailsPress = (navigator) => {
   return navigator.push(Routes.getDetailsRoute());
@@ -8,7 +8,8 @@ const onDetailsPress = (navigator) => {
 
 const HomeContainer = (props) => {
   return (
-    <Home
+
+    <battles.BattlesMod
       onDetailsPress={() => onDetailsPress(props.navigator)}
     />
   );

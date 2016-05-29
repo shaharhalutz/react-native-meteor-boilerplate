@@ -15,13 +15,14 @@
     "react-native": "^0.25.1",
     "react-native-keyboard-spacer": "^0.2.0",
     "react-native-meteor": "^1.0.0-rc3",
-    "react-native-tab-navigator": "^0.3.0"
     "react-native-tab-navigator": "^0.3.0",
     "react-redux": "4.4.2",
     "redux": "3.4.0",
     "redux-actions": "^0.9.1",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
+    "react-native-checkbox": "^1.0.8",
+    "react-native-selectme": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",

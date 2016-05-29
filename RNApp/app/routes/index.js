@@ -2,6 +2,8 @@ import React from 'react';
 import Home from './Home';
 import Details from './Details';
 import Profile from './Profile';
+import {game} from '../modules';
+
 
 const Routes = {
   getHomeRoute() {
@@ -18,11 +20,11 @@ const Routes = {
   getDetailsRoute() {
     return {
       renderScene(navigator) {
-        return <Details navigator={navigator} />;
+        return <game.Game navigator={navigator} />;
       },
 
       getTitle() {
-        return 'Details';
+        return 'Game';
       },
     };
   },
