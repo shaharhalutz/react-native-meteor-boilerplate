@@ -1,6 +1,6 @@
 import HomeContainer from './HomeContainer';
-import Home from './Home';
+//import Home from './Home';
 import Icon from './home-icon.png';
 
-export { Icon, Home };
+export { Icon };
 export default HomeContainer;
