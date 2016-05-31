@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {Component} from 'react';
 import { StyleSheet, View ,Text} from 'react-native'
 import { connect } from 'react-redux'
 
@@ -40,31 +40,52 @@ const renderCounters = (battles,toggleJoin,select,onPressed) => {
   })
 }
 
-const BattlesMod = (props) => {
-  const {
-    actions,
-    addNewCounter,
-    battles,
-    toggleJoin,
-    select
-  } = props
+class BattlesMod extends Component {
 
-  return (
-    <View style={styles.container}>
-      <Battles addFn={addNewCounter}>
-        {renderCounters(battles,toggleJoin,select,props.onDetailsPress)}
-      </Battles>
-      <Text style={styles.text} onPress={props.onDetailsPress}>Start Game</Text>
 
-    </View>
-  )
+  renderCounters(battles,toggleJoin,select,onPressed) {
+    return Object.keys(battles).map((id) => {
+      const battle = battles[id];
+
+      // TBD: why routing doesnt work ?
+      const onBattleSelected = function(id){
+        console.log('onBattleSelected')
+        onPressed();
+        select(id);
+      }
+
+      return (
+        <Battle
+          key={id}
+          toggleJoinFn={() => toggleJoin(id)}
+          selectFn={() => onBattleSelected(id)}
+          joined={battle.joined}
+          title={battle.title}
+          actions = {this.props.actions} >
+        </Battle>
+      )
+    })
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Battles addFn={this.props.addNewCounter}>
+          {this.renderCounters(this.props.battles,this.props.toggleJoin,this.props.select,this.props.onDetailsPress)}
+        </Battles>
+        <Text style={styles.text} onPress={this.props.onDetailsPress}>Start Game</Text>
+
+      </View>
+    )
+  }
 }
 
-BattlesMod.displayName = 'BattlesMod'
+//BattlesMod.displayName = 'BattlesMod'
 
 //it is a good practice to always indicate what type of props does your component
 //receive. This is really good for documenting and prevent you from a lot of bug during
 //development mode. Remember, all of these will be ignored once you set it to production.
+/*
 BattlesMod.propTypes = {
   addNewCounter: React.PropTypes.func.isRequired,
   battles: React.PropTypes.object.isRequired,
@@ -72,7 +93,7 @@ BattlesMod.propTypes = {
   select: React.PropTypes.func.isRequired,
   onDetailsPress: React.PropTypes.func.isRequired
 }
-
+*/
 //Here's the most complex part of our app. connect is a function which selects,
 //which part of our state tree you need to pass to your component. also, since
 //my App component is pure function, i am injecting addNewCounter, increment and
