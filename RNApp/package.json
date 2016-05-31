@@ -21,7 +21,7 @@
     "redux-actions": "^0.9.1",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1",
-    "react-native-checkbox": "^1.0.8",
+    "react-native-checkbox": "1.0.8",
     "react-native-selectme": "^1.0.0"
   },
   "devDependencies": {
