@@ -2,8 +2,8 @@
 // TBD: fix issue with effect gen Id, so all effects have correct and unique ids.
 
 
-
-import React, { StyleSheet, View ,Text} from 'react-native'
+import React from 'react';
+import { StyleSheet, View ,Text} from 'react-native'
 import { connect } from 'react-redux'
 
 import { Players, Player } from './../../components'

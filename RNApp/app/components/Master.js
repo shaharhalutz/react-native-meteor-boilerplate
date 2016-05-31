@@ -1,6 +1,6 @@
 'use strict';
-
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import React ,{ Component} from 'react';
+import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 const Master = (backgroundColor = '#F5FCFF') => class extends Component {
   render() {

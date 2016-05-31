@@ -1,4 +1,5 @@
-import React, { StyleSheet, View } from 'react-native'
+import React from 'react';
+import { StyleSheet, View } from 'react-native'
 
 import Effect from './Effect'
 
@@ -15,7 +16,7 @@ const Effects = (props) => {
   const renderEffects = function(effects){
     return Object.keys(effects).map((id) => {
       const effect1 = effects[id];
-      console.dir(effect1)
+      //console.dir(effect1)
 
       // TBD: why not working ?
       return (
@@ -25,7 +26,7 @@ const Effects = (props) => {
     })
   }
 
-  console.dir(effects)
+  //console.dir(effects)
   return (
     <View style={styles.container}>
       {renderEffects(effects)}

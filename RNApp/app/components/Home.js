@@ -1,6 +1,6 @@
 'use strict';
-
-import React, { Component, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import React , { Component} from 'react';
+import {  StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import {app} from '../modules';
 
 const Home = (backgroundColor = '#F5FCFF') => class extends Component {

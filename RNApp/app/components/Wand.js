@@ -1,4 +1,5 @@
-import React, { View, Text, Component, StyleSheet, TouchableOpacity } from 'react-native';
+import React,{ Component}  from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import DropDown, { Select, Option, OptionList } from 'react-native-selectme';
 import CastButton from './CastButton';
 

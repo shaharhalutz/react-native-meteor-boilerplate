@@ -1,4 +1,5 @@
-import React, { StyleSheet, View, Text } from 'react-native'
+import React from 'react';
+import { StyleSheet, View, Text } from 'react-native'
 import * as actions from '../modules/battles/actions'
 
 import Button from './ButtonB'

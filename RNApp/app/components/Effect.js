@@ -1,4 +1,5 @@
-import React, { StyleSheet, View,Text } from 'react-native'
+import React from 'react';
+import { StyleSheet, View,Text } from 'react-native'
 
 
 const styles = StyleSheet.create({
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
 
 const Effect = (props) => {
   const { effect } = props
-  console.dir(effect)
+  //console.dir(effect)
 
 
   return (
