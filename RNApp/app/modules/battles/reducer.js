@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import { ADD_NEW_COUNTER ,TOGGLE_JOIN,SELECT} from './constants'
+import { ADD_NEW_COUNTER ,TOGGLE_JOIN,SELECT,RECEIVE_POSTS} from './constants'
 
 const initialState = {
   idGen: 0,
@@ -60,4 +60,20 @@ export default handleActions({
       selectedBattle: id
     }
   },
+  [RECEIVE_POSTS]: (state, action) => {
+    const { posts} = action;
+    console.log('posts.len:'+posts.length)
+
+    //because payload contains the id and we already know that we are about
+    //to increment the value of that id, we modify only that value by one
+
+    return {
+      ...state,
+      battles: {
+        ...state.battles,
+        [posts[0]._id]:{title:posts[0].title}
+      }
+    }
+  },
+
 }, initialState)

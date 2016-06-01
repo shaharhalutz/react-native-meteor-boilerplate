@@ -1,4 +1,5 @@
-import { SELECT,TOGGLE_JOIN, ADD_NEW_COUNTER } from './constants'
+import { SELECT,TOGGLE_JOIN, ADD_NEW_COUNTER,RECEIVE_POSTS } from './constants'
+import Meteor from 'react-native-meteor'; // TBD: separate to API helper object for backend decupling
 
 //each action should have the following signiture.
 //  {
@@ -36,6 +37,37 @@ export const toggleJoin = (id) => {
 export const newCounter = () => {
   return {
     type: ADD_NEW_COUNTER
+  }
+}
+
+function receivePosts( json) {
+  return {
+    type: RECEIVE_POSTS,
+    posts: json, //json.data.children.map(child => child.data),
+    receivedAt: Date.now()
+  }
+}
+
+export function getBattles(postObject) {
+  //const { postId, ...rest } = postObject;
+  const userId = Meteor.userId();
+  return (dispatch) => {
+    //return Meteor.call('battles:getBattles', userId, {...rest}, (error, response) => {
+    return Meteor.call('battles:getBattles', userId, (error, response) => {
+
+      if (error) {
+        // TBD: add error handling
+        //dispatch({
+        //  type: "ERROR"
+        //});
+        console.log('battles:getBattles: error loading.')
+      }
+      return (dispatch(receivePosts(response)));
+      //dispatch({
+      //  type: "RECEIVE_POSTS",
+      //  data: response
+      //});
+    });
   }
 }
 

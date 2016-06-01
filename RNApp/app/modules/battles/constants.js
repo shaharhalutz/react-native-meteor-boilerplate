@@ -10,4 +10,7 @@ export const ADD_NEW_COUNTER = `${NAME}/NEW`
 
 export const TOGGLE_JOIN = `${NAME}/TOGGLE_JOIN`
 export const SELECT = `${NAME}/SELECT`
+export const RECEIVE_POSTS = `${NAME}/RECEIVE_POSTS`
+
+
 //as you can see above, each action is namespaced with module's name.
