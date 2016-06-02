@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
 })
-
+/*
 const renderCounters = (battles,toggleJoin,select,onPressed) => {
   return Object.keys(battles).map((id) => {
     const battle = battles[id];
@@ -39,7 +39,7 @@ const renderCounters = (battles,toggleJoin,select,onPressed) => {
     )
   })
 }
-
+*/
 class BattlesMod extends Component {
 
   componentDidMount() {
@@ -73,11 +73,9 @@ class BattlesMod extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Battles addFn={this.props.addNewCounter}>
+        <Battles addFn={this.props.addNewCounter} titleChangedFn={this.props.titleChanged} newBattleTitle={this.props.newBattleTitle} >
           {this.renderCounters(this.props.battles,this.props.toggleJoin,this.props.select,this.props.onDetailsPress)}
         </Battles>
-        <Text style={styles.text} onPress={this.props.onDetailsPress}>Start Game</Text>
-
       </View>
     )
   }
@@ -91,10 +89,10 @@ class BattlesMod extends Component {
 
 BattlesMod.propTypes = {
   addNewCounter: React.PropTypes.func.isRequired,
+  titleChanged: React.PropTypes.func.isRequired,
   battles: React.PropTypes.object.isRequired,
   toggleJoin: React.PropTypes.func.isRequired,
-  select: React.PropTypes.func.isRequired,
-  onDetailsPress: React.PropTypes.func.isRequired
+  select: React.PropTypes.func.isRequired
 }
 
 //Here's the most complex part of our app. connect is a function which selects,
@@ -104,10 +102,12 @@ BattlesMod.propTypes = {
 //way to seperate your connect and your pure function.
 export default connect(
   (state) => ({
-    battles: state.battles.battles
+    battles: state.battles.battles,
+    newBattleTitle:state.battles.newBattleTitle
   }),
   (dispatch) => ({
-    addNewCounter: () => dispatch(actions.newCounter()),
+    addNewCounter: (battle) => dispatch(actions.createBattle(battle)),
+    titleChanged: (title) => dispatch(actions.setTitle(title)),
     toggleJoin: (id) => dispatch(actions.toggleJoin(id)),
     select: (id) => dispatch(actions.select(id)),
     load: (id) => dispatch(actions.getBattles())

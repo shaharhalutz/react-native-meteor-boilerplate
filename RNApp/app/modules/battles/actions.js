@@ -1,4 +1,4 @@
-import { SELECT,TOGGLE_JOIN, ADD_NEW_COUNTER,RECEIVE_POSTS } from './constants'
+import { SELECT,TOGGLE_JOIN, ADD_NEW_COUNTER,RECEIVE_POSTS,SET_NEW_BATTLE_TITLE } from './constants'
 import Meteor from 'react-native-meteor'; // TBD: separate to API helper object for backend decupling
 
 //each action should have the following signiture.
@@ -12,6 +12,14 @@ import Meteor from 'react-native-meteor'; // TBD: separate to API helper object 
 
 
 
+export const setTitle = (title) => {
+  return {
+    type: SET_NEW_BATTLE_TITLE,
+    payload: {
+      title
+    }
+  }
+}
 
 //this action tell the reducer which battle with specified id was selected.
 export const select = (id) => {
@@ -34,9 +42,12 @@ export const toggleJoin = (id) => {
 }
 
 //tells the reducer, we need a new counter on the scene with a new ID
-export const newCounter = () => {
+const newCounter = (id) => {
   return {
-    type: ADD_NEW_COUNTER
+    type: ADD_NEW_COUNTER,
+    payload: {
+      id
+    }
   }
 }
 
@@ -53,7 +64,7 @@ export function getBattles(postObject) {
   const userId = Meteor.userId();
   return (dispatch) => {
     //return Meteor.call('battles:getBattles', userId, {...rest}, (error, response) => {
-    return Meteor.call('battles:getBattles', userId, (error, response) => {
+    Meteor.call('battles:getBattles', userId, (error, response) => {
 
       if (error) {
         // TBD: add error handling
@@ -62,12 +73,32 @@ export function getBattles(postObject) {
         //});
         console.log('battles:getBattles: error loading.')
       }
-      return (dispatch(receivePosts(response)));
+      dispatch(receivePosts(response));
       //dispatch({
       //  type: "RECEIVE_POSTS",
       //  data: response
       //});
     });
+  }
+}
+
+export function createBattle(battleInfo) {
+
+  //const userId = Meteor.userId();
+  return (dispatch,getState) => {
+    console.log('battles:createBattle: calling meteor: ')
+    //dispatch(newCounter());
+    const  title  = getState().battles.newBattleTitle;
+
+    Meteor.call('battles:createBattle', {title:title}, (error, battleId) => {
+      console.log('battles:createBattle:  meteor: call returned ')
+
+      if (error) {
+        console.log('battles:createBattle: error .')
+      }
+      dispatch(newCounter(battleId));
+    });
+
   }
 }
 
